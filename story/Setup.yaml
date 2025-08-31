@@ -1,0 +1,161 @@
+backgrounds:
+  # MAPA
+  amaps: assets/backgrounds/maps/amaps.png # mapa
+  loader-doomads: assets/gui/loader-doomads.png
+
+  # GUILD HALL
+  guildhall-1: assets/backgrounds/maps/guildhall-1.png # Entrance
+  guildhall-2: assets/backgrounds/maps/guildhall-2.png # Door
+  guildhall-3: assets/backgrounds/maps/guildhall-3.png # Hall
+  guildhall-4: assets/backgrounds/maps/guildhall-4.png # Doomads
+  guildhall-5: assets/backgrounds/maps/guildhall-5.png # Gaia
+  guildhall-6: assets/backgrounds/maps/guildhall-6.png # Weavers
+  guildhall-7: assets/backgrounds/maps/guildhall-7.png # Elementia
+  
+  
+  # SHADOWFALL
+  shadowfall-1: assets/backgrounds/maps/shadowfall-1.png # Entrance
+  shadowfall-2: assets/backgrounds/maps/shadowfall-2.png # Library
+  shadowfall-3: assets/backgrounds/maps/shadowfall-3.png # Training Room
+  shadowfall-4: assets/backgrounds/maps/shadowfall-4.png # Throne Room
+  
+  # DOOMWOOD
+  secrethideout-1: assets/backgrounds/maps/secrethideout-1.png # Entrance
+  secrethideout-2: assets/backgrounds/maps/secrethideout-2.png # Zorbark's Cabin
+  secrethideout-3: assets/backgrounds/maps/secrethideout-3.png # Downstairs
+  secrethideout-4: assets/backgrounds/maps/secrethideout-4.png # NecroU Entrance
+  secrethideout-5: assets/backgrounds/maps/secrethideout-5.png # NecroU
+  
+characters:
+  # MISC
+  unknown:
+    displayName: ???
+    speechColour: "#FFFFFF"
+    looks:
+    
+  # HOLLOWINK - MEMBERS
+  gabera:
+    displayName: Caiaque
+    speechcolour: "#FFFFFF"
+    voice: voiceLow
+    looks:
+      normal: assets/characters/Gabera.png
+  cavaliro:
+    displayName: Cavaliro Vampiro
+    speechcolour: "#FFFFFF"
+    voice: voiceLow
+    looks:
+      normal: assets/characters/Cavaliro.png
+  pen:	
+    displayName: Pen
+    speechColour: "#FFFFFF"
+    voice: voiceLow
+    looks:
+      normal: assets/characters/Pen.png
+      
+  inky:	
+    displayName: Inky
+    speechColour: "#FFFFFF"
+    looks:
+      normal: assets/characters/Inky.png
+  
+  # NPCS
+  gravelyn:	
+    displayName: Gravelyn
+    speechColour: "#FFFFFF"
+    voice: voiceHigh
+    looks:
+      normal: assets/characters/Gravelyn.png      
+      
+  gertrudes:
+    displayName: Gertrudes
+    speechColour: "#FFFFFF"
+    looks:
+
+cgs:
+  
+
+music:
+  title: assets/audio/CozyVillage.mp3
+  nightmare: assets/audio/nightmare.wav
+  safiria: assets/gui/Safiria_Mareoceu.mp3
+
+sfx:
+  # HUD SOUNDS
+  scoreUpdateSFX: assets/audio/diamond.mp3
+  hudhover: assets/audio/hudhover.mp3
+  
+  # VOICES
+  voiceLow: assets/audio/voices/lowvoice.wav
+  voiceHigh: assets/audio/voices/highvoice.wav
+  voiceMedium: assets/audio/voices/mediumvoice.wav
+
+  # EFFECTS
+  ladder: assets/audio/ladder.mp3
+
+
+pointAndClick:
+# Nome do mapa
+  # NONE: SPRITE X Y CENA
+  shadowfall-12:
+    book: book 537 249 bookScene
+  
+  # INTERACTION
+  action:
+    action: action 0 0 action
+  travel-up:
+    travel-up: travel-up 0 0 travel-up
+  travel-down:
+    travel-down: travel-down 0 0 travel-down
+  travel-left:
+    travel-left: travel-left 0 0 travel-left
+  travel-right:
+    travel-right: travel-right 0 0 travel-right
+
+  quest:
+    quest: quest 3000 3000 quest
+  info:
+    info: info 3000 3000 info
+  start:
+    ghal: ghal 537 249 guild
+    
+  # MAP PINS  
+  pin-doomwood:
+    pin-doomwood: pin-doomwood 493 408 maps
+    
+  pin-shadowfall:
+    pin-shadowfall: pin-shadowfall 637 183 maps
+    
+extra:
+  image:
+    title: assets/backgrounds/cuts/guild_hall_cs3.png
+    
+    # HUD
+    scorer: assets/gui/scorerBox.png
+
+    
+  
+  spritesheets:
+  
+    # POINT AND CLICK OBJECTS
+    travel-up: assets/objects/travel-up.png 80 23.05
+    travel-down: assets/objects/travel-down.png 80 30.61
+    travel-left: assets/objects/travel-left.png 75 31.63
+    travel-right: assets/objects/travel-right.png 75 31.63
+    action: assets/objects/action.png 76 52
+
+    info: assets/objects/info.png 50 59.79
+    quest: assets/objects/quest.png 50 59.79
+    
+    book: assets/objects/book.png 250 158
+    
+    # MAP PINS
+    pin-doomwood: assets/backgrounds/maps/doomwood.png 167 102
+    pin-shadowfall: assets/backgrounds/maps/shadowfall.png 167 102
+    ghal: assets/backgrounds/maps/guildhall.png 167 102
+    
+    # VFX
+    rain: assets/ambient/rain.png 17 17
+    sakura: assets/ambient/sakura-petals.png 17 26
+    snowflakes: assets/ambient/snowflakes.png 17 17
+    snowflakes_large: assets/ambient/snowflakes_large.png 64 64

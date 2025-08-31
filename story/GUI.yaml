@@ -1,0 +1,454 @@
+name: HollowInk
+resolution:
+  - 1280
+  - 720
+assetCounter: 45
+config:
+  hud:
+    
+    # BALÃO DE ESCOLHAS
+    - id: default
+      type: choices
+      asset: asset31
+      x: 828
+      'y': 360
+      alignment: centered
+      separation: 6
+      sfx: none
+      chosenColor: '#7A6947'
+      text:
+        x: 35
+        'y': 15
+        style:
+          font: Inter
+          fontSize: 20px
+          fill: '#FFFFFF'
+          align: left
+          boundsAlignV: middle
+    
+    # CAIXA DE DIALOGO
+    - id: default
+      type: messageBox
+      asset: asset19
+      x: 243
+      'y': 476
+      sfx: none
+      text:
+        x: 65
+        'y': 75
+        style:
+          font: Inter
+          fontSize: 20px
+          fill: '#A8A8A8'
+          align: left
+          wordWrap: true
+          wordWrapWidth: '581'
+      ctc:
+        x: 670
+        'y': 45
+        asset: asset21
+        
+    # NOME DO PERSONAGEM
+    - id: default
+      type: nameBox
+      asset: asset20
+      x: 243
+      'y': 476
+      text:
+        x: 65
+        'y': 45
+        style:
+          font: BebasNeue-Regular
+          fontSize: 26px
+          fill: '#FFFFFF'
+          align: left
+          boundsAlignH: left
+          
+          
+          
+ # BOTOES - IN-GAME
+    # FUNDO
+    - type: image
+      x: 333
+      'y': 686
+      asset: asset22
+    # OPÇÕES  
+    - type: button
+      x: 717
+      'y': 693
+      asset: asset24
+      binding: openMenu
+      menu: settings
+    # SALVAR/CARREGAR  
+    - type: button
+      x: 570
+      'y': 693
+      asset: asset23
+      binding: openMenu
+      menu: saveload
+    # AUTO  
+    - type: button
+      x: 366
+      'y': 693
+      asset: asset26
+      binding: auto
+    # SKIP
+    - type: button
+      x: 471
+      'y': 693
+      asset: asset25
+      binding: skip
+    # QUIT
+    - type: button
+      x: 848
+      'y': 693
+      asset: asset41 # não está funcionando
+      binding: openMenu
+      menu: main
+      
+  # EXTRAS
+    # BORDA
+    - type: image
+      x: 10
+      'y': 9
+      asset: border
+      
+  menus:
+    
+    # MENU PRINCIPAL
+    main:
+      - type: image
+        x: 0
+        'y': 0
+        asset: loaderbackground
+      - type: music
+        asset: title_bgm
+      - type: button
+        x: 565
+        'y': 430
+        asset: asset3
+        binding: openMenu
+        menu: saveload
+      - type: button
+        x: 565
+        'y': 353
+        asset: asset4
+        binding: start
+      - type: button
+        x: 565
+        'y': 507
+        asset: asset5
+        binding: openMenu
+        menu: settings
+        
+    # MENU CONFIGURAÇÕES    
+    settings:
+      - type: image
+        x: 0
+        'y': 0
+        asset: asset16
+#      - type: label
+#        x: 600
+#        'y': 30
+#        text: AJUSTES
+#        style:
+#         font: BebasNeue-Regular
+#          fontSize: 47px
+#          fill: '#FFFFFF'
+#          boundsAlignH: center
+#          boundsAlignV: top
+#      - type: label
+#        x: 100
+#        'y': 175
+#        text: MUSICA
+#        style:
+#          font: BebasNeue-Regular
+#          fontSize: 33px
+#          fill: '#FFFFFF'
+#          boundsAlignH: center
+#          boundsAlignV: top
+#      - type: label
+#        x: 109
+#        'y': 325
+#        text: SFX
+#        style:
+#          font: BebasNeue-Regular
+#          fontSize: 33px
+#          fill: '#FFFFFF'
+#          boundsAlignH: center
+#          boundsAlignV: top
+#      - type: label
+#        x: 503
+#        'y': 325
+#        text: VEL. AUTO 
+#        style:
+#          font: BebasNeue-Regular
+#          fontSize: 33px
+#          fill: '#FFFFFF'
+#          boundsAlignH: center
+#          boundsAlignV: top
+#      - type: label
+#        x: 503
+#        'y': 175
+#        text: VEL. TEXTO
+#       style:
+#          font: BebasNeue-Regular
+#          fontSize: 33px
+#          fill: '#FFFFFF'
+#          boundsAlignH: center
+#          boundsAlignV: top
+      # BGM
+      - type: slider
+        x: 481
+        'y': 321.89
+        asset: asset12
+        binding: changeUserPreference
+        userPreference: bgmv
+        mask: horizontal
+      # SFX
+      - type: slider
+        x: 481
+        'y': 238.95
+        asset: asset12
+        binding: changeUserPreference
+        userPreference: sfxv
+        mask: horizontal
+      # TEXT SPEED
+      - type: slider
+        x: 481
+        'y': 487.79
+        asset: asset12
+        binding: changeUserPreference
+        userPreference: textSpeed
+        mask: horizontal
+      # AUTO SPEED
+      - type: slider
+        x: 481
+        'y': 404.84
+        asset: asset12
+        binding: changeUserPreference
+        userPreference: autoSpeed
+        mask: horizontal
+      # BOTÃO RETORNAR
+      - type: button
+        x: 597
+        'y': 565
+        asset: asset17
+        binding: return
+        
+    # MENU - SALVAR / CARREGAR 
+    saveload:
+      - type: image
+        x: 0
+        'y': 0
+        asset: asset16
+      - type: saveSlot
+        x: 71
+        'y': 168
+        asset: asset18
+        slot: '0'
+        thumbnail:
+          x: 24
+          'y': 22
+          width: 154
+          height: 110
+      - type: saveSlot
+        x: 303
+        'y': 168
+        asset: asset18
+        slot: '1'
+        thumbnail:
+          x: 24
+          'y': 22
+          width: 154
+          height: 110
+      - type: saveSlot
+        x: 531
+        'y': 168
+        asset: asset18
+        slot: '2'
+        thumbnail:
+          x: 24
+          'y': 22
+          width: 154
+          height: 110
+      - type: label
+        x: 580
+        'y': 30
+        text: CARREGAR
+        style:
+          font: BebasNeue-Regular
+          fontSize: 47px
+          fill: '#FFFFFF'
+          boundsAlignH: left
+          boundsAlignV: top
+      - type: button
+        x: 120
+        'y': 340
+        asset: asset39
+        binding: save
+        slot: '0'
+      - type: button
+        x: 120
+        'y': 408
+        asset: asset40
+        binding: load
+        slot: '0'
+      - type: button
+        x: 353
+        'y': 340
+        asset: asset39
+        binding: save
+        slot: '1'
+      - type: button
+        x: 353
+        'y': 408
+        asset: asset40
+        binding: load
+        slot: '1'
+      - type: button
+        x: 580
+        'y': 340
+        asset: asset39
+        binding: save
+        slot: '2'
+      - type: button
+        x: 580
+        'y': 408
+        asset: asset40
+        binding: load
+        slot: '2'
+      - type: button
+        x: 30
+        'y': 10
+        asset: asset17
+        binding: return
+    
+    # DECLARAR ASSETS
+assets:
+  images:
+    loaderbackground:
+      name: loaderbackground
+      fileName: loaderloaderbackground.png
+    asset16:
+      name: asset16
+      fileName: saveloadasset16.png
+    asset18:
+      name: asset18
+      fileName: saveloadasset18.png
+    asset19:
+      name: asset19
+      fileName: hudasset19.png
+    asset20:
+      name: asset20
+      fileName: hudasset20.png
+    border:
+      name: border
+      fileName: border.png
+    asset22:
+      name: asset22
+      fileName: hudasset22.png
+    
+      
+  spritesheets:
+    loading-bar:
+      name: loading-bar
+      fileName: loaderloading-bar.png
+      w: 532
+      h: 28
+    asset3:
+      name: asset3
+      fileName: mainasset3.png
+      w: 199
+      h: 82
+    asset4:
+      name: asset4
+      fileName: mainasset4.png
+      w: 143
+      h: 82
+    asset5:
+      name: asset5
+      fileName: mainasset5.png
+      w: 199
+      h: 82
+    asset12:
+      name: asset12
+      fileName: settingsasset12.png
+      w: 320
+      h: 24
+    asset17:
+      name: asset17
+      fileName: saveloadasset17.png
+      w: 163
+      h: 82
+    asset21:
+      name: asset21
+      fileName: hudasset21.png
+      w: 75
+      h: 22
+    asset23:
+      name: asset23
+      fileName: hudasset23.png
+      w: 111
+      h: 18.95
+    asset24:
+      name: asset24
+      fileName: hudasset24.png
+      w: 95
+      h: 18.95
+    asset25:
+      name: asset25
+      fileName: hudasset25.png
+      w: 63
+      h: 18.95
+    
+    asset26:
+      name: asset26
+      fileName: hudasset26.png
+      w: 69
+      h: 18
+    asset31:
+      name: asset31
+      fileName: hudasset31.png
+      w: 443
+      h: 56
+    asset32:
+      name: asset32
+      fileName: hudasset32.png
+      w: 716
+      h: 65
+    asset39:
+      name: asset39
+      fileName: saveloadasset39.png
+      w: 103
+      h: 53
+    asset40:
+      name: asset40
+      fileName: saveloadasset40.png
+      w: 103
+      h: 53
+    asset41:
+      name: asset41
+      fileName: hudassetquit.png
+      w: 66
+      h: 18.95
+    
+  fonts:
+    fontsaudimat-mono:
+      fileName: fontsfontsaudimat-mono.ttf
+      name: fontsaudimat-mono
+    Inter:
+      fileName: Inter.ttf
+      name: Inter
+    BebasNeue-Regular:
+      fileName: BebasNeue-Regular.ttf
+      name: BebasNeue-Regular
+      
+  audio:
+    # Safiria - @Mareoceu
+    title_bgm:
+      fileName: Safiria_Mareoceu.mp3
+      name: Safiria_Mareoceu
+      type: music
+madeWithRenJSBuilder: "2.0"
+assetsPath: assets/gui/

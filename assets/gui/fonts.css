@@ -1,0 +1,49 @@
+
+
+@font-face {
+
+    font-family: 'fontsaudimat-mono';
+
+    src: url('/assets/gui/fonts/fontsfontsaudimat-mono.ttf');
+
+    font-weight: normal;
+
+    font-style: normal;
+
+    }
+
+
+@font-face {
+
+    font-family: 'Inter';
+
+    src: url('/assets/gui/fonts/Inter.ttf');
+
+    font-weight: normal;
+
+    font-style: normal;
+
+    }
+
+@font-face {
+
+    font-family: 'BebasNeue-Regular';
+
+    src: url('/assets/gui/fonts/BebasNeue-Regular.ttf');
+
+    font-weight: normal;
+
+    font-style: normal;
+
+    }
+@font-face{
+    
+    font-family: 'Arima Madurai';
+
+    src: url('');
+
+    font-style: normal;
+
+    font-weight: 900;
+
+    }

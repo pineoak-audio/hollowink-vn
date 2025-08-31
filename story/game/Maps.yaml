@@ -1,0 +1,274 @@
+# -------------------------------------------------------------------------------
+#                                    SCENES
+#                                    Summary
+# -------------------------------------------------------------------------------
+# 1. GUILD HALL
+#    1.0. Scenes Handler
+#    1.1. Entrance
+#    1.2. Door
+#    1.3. Hall
+#    1.4. Doomads
+#    1.5. Gaia
+#    1.6. Weavers
+#    1.7. Elementia
+#
+# 2. SHADOWFALL
+#    2.0. Scenes Handler
+#    2.1. Entrance
+#    2.2. Library
+#    2.3  Training Room
+#    2.4. Throne Room
+#
+# 3. DOOMWOOD
+#    3.0 Scenes Handler
+#    3.1 Secret Hideout Entrance
+#    3.2 Zorbark's Cabin
+#    3.3 Downstairs
+#    3.4 NecroU Entrance
+#    3.5 NecroU
+#    
+# -------------------------------------------------------------------------------
+
+# -------------------------------------------------------------------------------
+#                                   GUILD HALL                                  #
+# -------------------------------------------------------------------------------
+
+guildhall-choices:
+  - choice:
+    - text: Choose a room to go.
+    - Entrance !if ({map} != 'guildhall-entrance'):
+      - scene: guildhall-entrance
+    - Door !if ({map} != 'guildhall-door'):
+      - scene: guildhall-door
+    - Hall:
+      - scene: guildhall-hall
+    - Doomads:
+      - scene: guildhall-doomads
+    - Gaia:
+      - scene: guildhall-gaia
+    - Weavers:
+      - scene: guildhall-weavers
+    - Elementia:
+      - scene: guildhall-elementia
+
+guildhall-entrance:
+  - var map: "guildhall-entrance"
+  - hide ALL:
+  - show guildhall-1: WITH PaCTransition
+  - play safiria: LOOPED
+  - call Scorer: "{score}"
+  #- scene: guildhall-choices
+
+  # PADS
+  - call PointAndClick: add
+    name: travel-up
+    x: 329
+    y: 449
+    scene: guildhall-door
+  - call PointAndClick: activate
+
+guildhall-door:
+  - var map: "guildhall-door"
+  - hide ALL:
+  - show guildhall-2: WITH PaCTransition
+  - call Scorer: "{score}"
+  #- scene: guildhall-choices
+
+  # PADS
+  - call PointAndClick: add
+    name: action
+    x: 602
+    y: 524
+    scene: guildhall-hall
+  - call PointAndClick: activate
+
+guildhall-hall:
+  - var map: "guildhall-hall"
+  - hide ALL:
+  - show guildhall-3: WITH PaCTransition
+  - call Scorer: "{score}"
+  - scene: guildhall-choices
+
+guildhall-doomads:
+  - var map: "guildhall-doomads"
+  - hide ALL:
+  - show guildhall-4: WITH PaCTransition
+  - call Scorer: "{score}"
+  - scene: guildhall-choices
+
+guildhall-gaia:
+  - var map: "guildhall-gaia"
+  - hide ALL:
+  - show guildhall-5: WITH PaCTransition
+  - call Scorer: "{score}"
+  - scene: guildhall-choices
+
+guildhall-weavers:
+  - var map: "guildhall-weavers"
+  - hide ALL:
+  - show guildhall-6: WITH PaCTransition
+  - call Scorer: "{score}"
+  - scene: guildhall-choices
+
+guildhall-elementia:
+  - var map: "guildhall-elementia"
+  - hide ALL:
+  - show guildhall-7: WITH PaCTransition
+  - call Scorer: "{score}"
+  - scene: guildhall-choices
+
+# -------------------------------------------------------------------------------
+#                                   SHADOWFALL                                  #
+# -------------------------------------------------------------------------------
+
+# [SHADOWFALL - Choices] .................................................... 2.0
+shadowfall-choices:
+  - choice:
+    - text: Choose a room to go.
+    - Library:
+      - scene: shadowfall-library
+    - Training Room:
+      - scene: shadowfall-training
+    - Throne Room:
+      - scene: shadowfall-throne
+
+# [SHADOWFALL - Entrance] ................................................... 2.1
+shadowfall-entrance:
+  - var map: "entrance"
+  - hide ALL:
+  - wait: 200
+  - show shadowfall-1: WITH FADE
+  - play safiria: LOOPED
+  - call Scorer: "{score}"
+  
+  # NPC:
+  - if ({plague} == false):
+    - scene: npc-gravelyn
+  - else:
+    - scene: shadowfall-choices
+  
+# [SHADOWFALL - Library] ................................................... 2.2
+shadowfall-library:
+  - var map: "library"
+  - hide ALL:
+  - show shadowfall-2: WITH FADE
+  - call Scorer: "{score}"
+  
+  # NPC:
+  - scene: npc-caiaque
+  
+  # [SHADOWFALL - Training Room] ........................................... 2.3
+shadowfall-training:
+  - var map: "training"
+  - hide ALL:
+  - show shadowfall-3: WITH FADE
+  - call Scorer: "{score}"
+  
+  # NPC:
+  - scene: npc-cavaliro
+
+  # [SHADOWFALL - Throne Room] ............................................. 2.4
+shadowfall-throne:
+  - var map: "throne"
+  - hide ALL:
+  - show shadowfall-4: WITH FADE
+  - call Scorer: "{score}"
+  
+  # NPC:
+  - scene: npc-gravelyn
+  
+# -------------------------------------------------------------------------------
+#                                    DOOMWOOD                                   #
+# -------------------------------------------------------------------------------
+
+# [DOOMWOOD - Secret Hideout] ............................................... 3.0
+secrethideout-choices:
+  - choice:
+    - text: Choose a room to go.
+    - Entrance !if ({map} != 'secrethideout-entrance'):
+      - scene: secrethideout-entrance
+    - Zorbak !if ({map} != 'secrethideout-zorbak'):
+      - scene: secrethideout-zorbak
+    - Downstairs:
+      - scene: secrethideout-downstairs
+    - NecroU:
+      - scene: secrethideout-necrou
+    - NecroU - Entrance:
+      - scene: secrethideout-necrou-r1
+
+# [DOOMWOOD - Secret Hideout - Entrance] .................................... 3.1       
+secrethideout-entrance:
+  - var map: "secrethideout-entrance"
+  - hide ALL:
+  - wait: 200
+  - show secrethideout-1: WITH FADE
+  - play nightmare: LOOPED
+  - call Scorer: "{score}"
+  
+  # NPC:
+  
+  # PADS
+  - call PointAndClick: add
+    name: action
+    x: 630
+    y: 391
+    scene: secrethideout-zorbak
+  - call PointAndClick: activate
+  
+# [DOOMWOOD - Secret Hideout - Zorbak] ..................................... 3.2   
+secrethideout-zorbak:
+  - var map: "secrethideout-zorbak"
+  - hide ALL:
+  - wait: 200
+  - show secrethideout-2: WITH FADE
+
+  # PADS
+
+  # To Entrance
+  - call PointAndClick: add
+    name: action
+    x: 190
+    y: 542
+    scene: secrethideout-entrance
+  - call PointAndClick: activate
+
+  # To Downstairs
+  - call PointAndClick: add
+    name: action
+    x: 937
+    y: 580
+    scene: secrethideout-downstairs
+  - call PointAndClick: activate
+
+secrethideout-downstairs:
+  - if ({map} == 'secrethideout-zorbak'):
+    - var map: "secrethideout-downstairs"
+    - hide ALL:
+    - show secrethideout-3: WITH FADE
+    - play ladder:
+    - wait: 3000
+    - hide ALL:
+    - scene: secrethideout-necrou
+  - else:
+    - var map: "secrethideout-downstairs"
+    - hide ALL:
+    - show secrethideout-3: WITH FADE
+    - play ladder:
+    - wait: 3000
+
+    - hide ALL:
+    - scene: secrethideout-zorbak
+
+secrethideout-necrou:
+  - var map: "secrethideout-necrou"
+  - hide ALL:
+  - show secrethideout-4: WITH FADE
+  - call Scorer: "{score}"
+  - scene: secrethideout-choices
+
+secrethideout-necrou-r1:
+  - var map: "secrethideout-necrou-r1"
+  - hide ALL:
+  - show secrethideout-5: WITH FADE
+  - call Scorer: "{score}"
+  - scene: secrethideout-choices

@@ -1,0 +1,80 @@
+
+
+# -------------------------------------------------------------------------------
+#                                  QUESTS VARS
+#                                 Load on Play
+# -------------------------------------------------------------------------------
+# 1. GUILD HALL
+#    1.1 Choose your house
+#    1.2
+# 2. SHADOWFALL
+#    2.1. The Undead Plague
+#    2.2. NEXT QUEST
+# -------------------------------------------------------------------------------
+questVars:
+
+# [The Undead Plague] ....................................................... 2.1
+
+  # NPC - Place - Map: 
+  # gravelyn - Shadowfall-1 - Entrance
+  - var plague: false
+  
+  # REQUIREMENTS:
+  # - Gather information with Caiaque.
+  # - Read Necromancy Book.
+  # - Track the Litch Lord Kyll.
+  
+  - var plague_item1req: 1 
+  - var plague_item1have: 0
+  - var plague_item2req: 3 
+  - var plague_item2have: 0
+  - var plague_item3req: 1 
+  - var plague_item3have: 0
+  
+  # COMPLETE BOOLEAN:
+  - var plague_complete: "{plague_item1have} >= {plague_item1req} && {plague_item2have} >= {plague_item2req} && {plague_item3have} >= {plague_item3req}"
+  
+# [WRITE THE MISSION DOWN] .................................................. 2.2
+
+  - scene: mapa
+
+
+
+# -------------------------------------------------------------------------------
+#                                    QUESTS
+# ------------------------------------------------------------------------------- 
+
+npc-caiaque-quest-plague-1:
+    # [The Undead Plage] - Gather information with Caiaque.
+    - var plague_item1have: 1
+    - gabera says: Hehehe...
+    - gabera says: The (bold)Lich Lord Kyll(end) cast a plague spell upon all the undeads near Shadowfall forcing them to revive, healing all the lost flesh.
+    - gabera says: However, the brain is a really complex organ to recreate. You can guess where that ended...
+    - gabera says: All I can do is point out which books you must read in order to undo what he've done. Take a look at the room and click on the book you want to read.
+    - gabera says: The book is known as The Asnwer. It's the 42nd from its collection.
+    - hide gabera: WITH FADE
+    - call PointAndClick: add
+      name: book
+      x: 200
+      y: 300
+      scene: npc-caiaque-quest-plague-2
+    - call PointAndClick: activate
+    
+
+npc-caiaque-quest-plague-2:
+  # [The Undead Plage] - Read Necromancy books.
+  - call PointAndClick: activate
+  - if ({plague_item2have} < {plague_item2req}):
+    - var plague_item2have: "{plague_item2have} + 1"
+    - text: Every 100 years a flower rises from the ground and with it destruction is spreaded.
+    - var plague_item2have: "{plague_item2have} + 1"
+    - text: Who ever possesses it might live forever. It can only be found with --
+    - var plague_item2have: "{plague_item2have} + 1"
+    - call PointAndClick: remove book
+    - text: (italic)The rest of the pages were torn.(end)
+    - scene: npc-caiaque-quest-plague-2
+  - else:
+    - show gabera: WITH FADE
+    - gabera says: Good luck on finding the reagents. The missing should be with the Lich itself. Hmmm... Maybe the (bold)Cavaliro Vampiro(end) can help you.
+    - gabera says: He rescued some undeads and is watching them at the Training Room.
+    - scene: shadowfall-training

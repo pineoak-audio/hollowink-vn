@@ -1,0 +1,224 @@
+# -------------------------------------------------------------------------------
+#                                      NPC
+#                                    Summary
+# -------------------------------------------------------------------------------
+#           This section contains information about NPCs and Dialogs.
+# 1. SHADOWFALL
+#    1.1. gravelyn
+#    1.2. Gabera
+#    1.3. Cavaliro
+# _______________________________________________________________________________
+
+# [NPC - gravelyn] .......................................................... 1.1
+npc-gravelyn:
+  - show gravelyn: WITH FUSION CONTINUE
+
+# [WELCOMING] ............................................................. 1.1.1
+  - if ({gravelyn} == 0):
+    - gravelyn says: Hello, hero! It's been a while we don't see each other. 
+    - gravelyn says: You came in such a bad time... The undeads are suffering from a plague spreaded by a powerful Lich.
+    - var cavaliro: "{gravelyn} + 1"
+    - scene: npc-gravelyn-dialog
+
+# [NOT KNOWN]
+  - if ({gravelyn} > 0 && {gravelyn} <= 3):
+    - gravelyn says: Hello, hero! It's the first time I see you here. Feel free to wander around Shadowfall. 
+
+# [GETTING TO KNOW]
+  - if ({gravelyn} >= 3  && {gravelyn} <= 5):
+    - gravelyn says: Hey sweetie! I hope youre doing well! This is your {gravelyn} time here. Would you like to check my options?
+
+# [VERY INTIMATE]
+  - if ({gravelyn} > 5):
+    - gravelyn says: Hey honey! What did you cook for me today? Im starving. Anyway, how can I help you?
+
+# [LOVE OF ITS LIFE]
+
+  - scene: npc-gravelyn-dialog 
+
+# [DIALOG CHOICE] ........................................................ 1.1.2
+
+npc-gravelyn-dialog: 
+
+# gravelyn - AT SHADOWFALL - ENTRANCE 
+  - if ({map} == 'entrance'):
+    - choice:    
+      - gravelyn says: Well, anything I can do for you?
+      # [QUEST: THE UNDEAD PLAGUE] .............................................. 
+      - (color:#33CC33)The Undead Plague(end) !if ({plague} == false):
+        - gravelyn says: Oh, so you want to help me in this task... Well, you can start looking for (bold)Caiaque(end), a skilled necromancer. He seems to know what happened.
+        # [GIVE DIAMONDS]
+        - var score: "{score} + 50"
+        - call Scorer: "{score}"
+        - gravelyn says: Take this. He might ask for money. 
+        - gravelyn says: I should go, but you can find me at (bold)Throne Room(end).
+        - var plague: true
+        - hide CHARS: WITH FADE
+        - scene: shadowfall-choices
+
+
+    # [RELATIONSHIP: GIFTS AND TALKS] ..........................................
+  - if ({map} == 'throne'):
+    - choice:
+      - Visit Caiaque !if ({plague} == true && {plague_complete} == false):
+        - gravelyn says: Caiaque must be there. He might know something.
+        - scene: shadowfall-library
+        
+      # [TALK: ABOUT DOOMADS AND HERSELF] .......................................  
+      - Doomads Story:
+        - gravelyn says: The (bold)House of Doomads(end) is a famous group of Necromancers from HollowInk. They're powerful and deadly.
+        - scene: npc-gravelyn-dialog
+      - How's Caiaque:
+        - gravelyn says: I haven't heard of him in a while. I hope his disciple is well because he seemed a bit dead.
+        - scene: npc-gravelyn-dialog
+
+
+
+# [NPC - GABERA] ............................................................ 1.2 
+
+npc-caiaque:
+
+  - var caiaque: "{caiaque} + 1"
+  - show gabera: WITH FUSION CONTINUE
+
+# [WELCOMING] ............................................................. 1.1.1
+
+# [NOT KNOWN]
+  - if ({caiaque} < 3):
+    - gabera says:  You better not disturb me.  
+
+# [GETTING TO KNOW]
+  - if ({caiaque} >= 3  && {caiaque} <= 5):
+    - gabera says: You... You're still wandering over this library? 
+
+  # [VERY INTIMATE]
+  - if ({caiaque} > 5):
+    - gabera says: i don't like you, but I don't dislike either. 
+
+  # [LOVE OF ITS LIFE]
+
+  - scene: npc-caiaque-dialog 
+
+# [DIALOG CHOICE] ........................................................ 1.1.2
+
+npc-caiaque-dialog: 
+
+  # CAIAQUE - AT SHADOWFALL - LIBRARY 
+  - if ({map} == 'library'):
+    - choice:    
+      - gabera says: I give you 1 minute before I cast you out from this room.
+
+# [QUEST: THE UNDEAD PLAGUE] .............................................. 
+      - (color:#33CC33)📜 The Undead Plague(end) !if ({plague} == true && {plague_complete} == false):
+        - gabera says: Oh, that's a problematic plague... The dead are coming back to life, literaly.
+        - gabera says: They're wandering all the way back to their houses and scaring people. Personally, I don't care.
+        - if ({plague_item1have} == 0):
+          - choice:
+            - gabera says: I'll need money if you want me to speak...
+            - Give (color:#00FFFF)50 Diamonds(end):
+              # [WITHDRAW DIAMOND]
+              - if ({score} >= "50"):
+                - var score: "{score} - 50"
+                - call Scorer: "{score}"
+              # [CONTINUES]   
+                - scene: npc-caiaque-quest-plague-1
+
+            # [NO MONEY]   
+              - else:
+                - gabera says: No money, no info.
+                - scene: npc-caiaque-dialog
+            - Don't give:
+              - gabera says: Well, can't help you. Get out!
+              - scene: npc-caiaque-dialog
+        - else:
+          - gabera says: The (bold)Lich Lord Kyll(end) cast a plague spell upon all the undeads near Shadowfall forcing them to revive, healing all the lost flesh.
+          - gabera says: However, the brain is a really complex organ to recreate. You can guess where that ended...
+          - scene: npc-caiaque-dialog
+
+# [RELATIONSHIP: GIFTS AND TALKS] ........................................ 
+      - Necromancy or me?:
+        - gabera says: Hmm... I don't need people like you asking about my un-life.
+        - scene: npc-caiaque-dialog
+      
+        # [ACTIONS] ........................................ 
+      - Go to Entrance:
+        - scene: shadowfall-entrance
+        - scene: shadowfall-choices
+
+##################################################################################
+#################################     NEXT     ###################################
+##################################################################################
+
+
+# [NPC - CAVALIRO VAMPIRO] .................................................. 1.3 
+
+npc-cavaliro:
+
+  # Show the NPC.
+  - show cavaliro: WITH FUSION CONTINUE
+
+# [WELCOMING] ............................................./................ 1.1
+
+# [NOT KNOWN]
+  - if ({cavaliro} == 0):
+    - cavaliro says: I smell fear in your blood. That amuses me! Muahahaha
+    - cavaliro says: Unless you're not an enemy, you shall not fear me.
+    - cavaliro says: Sorry for the the hostility. Ha ha ha! It's not common to see people like you around the all mighty Shadowfall Fortress. So...
+    - var cavaliro: "{cavaliro} + 1"
+    - scene: npc-cavaliro-dialog
+
+  - if ({cavaliro} >= 1  && {cavaliro} < 3):
+    - cavaliro says: Welcome back! I was hoping to see you again... 
+# [GETTING TO KNOW]
+  - if ({cavaliro} >= 3  && {cavaliro} <= 5):
+    - cavaliro says: Nice to meet you again! How things are going?
+
+# [VERY INTIMATE]
+  - if ({cavaliro} > 5 && {cavaliro} < 10):
+    - cavaliro says: I like to be with you. Please, get comfy. My place is yours.
+
+# [LOVE OF ITS LIFE]
+  - if ({cavaliro} > 10):
+    - cavaliro says: Love you.
+
+  - scene: npc-cavaliro-dialog 
+
+# [DIALOG CHOICE] .......................................................... 1.2
+
+npc-cavaliro-dialog: 
+
+# cavaliro - AT SHADOWFALL - LIBRARY 
+  - if ({map} == 'training'):
+    
+    - choice:
+      # Message with choices after.
+      - cavaliro says: What do you want today?
+      
+      # [QUEST: THE UNDEAD PLAGUE] ..............................................
+      # Check if the quests is active AND not complete.
+      
+      - (color:#33CC33)📜 The Undead Plague (end) !if ({plague} == true && {plague_complete} == false):
+        - cavaliro says: Oh, the plague... Being an undead myself you see why I'm locked with these fellows here.
+        - cavaliro says: That Lich came saying that he was going to study at the Library but he stole its books instead.
+        - cavaliro says: Before leaving, the skies became purple-ish and a powerful lightning stroke the ground.
+        - cavaliro says: The Undead Army started to act strange after that. Flesh started to be created from nowhere and our highness gravelyn lost the control over them.
+
+      - My name? !if ({cavaliro} < 2):
+        - cavaliro says: My name?
+        - cavaliro says: My name? Hah! I lost it along with my humanity several years ago, but you can call me Cavaliro Vampiro. It's spelt wrong on purpose.
+        - scene: npc-cavaliro-dialog
+      
+      - Who are you? !if ({cavaliro} > 2 && {cavaliro} < 5):
+        - cavaliro says: Who am I? Come on, we can do better. I was a knight for the Queen Safiria but I died in a feral battle against Dage the Evil. It was my first and last combat.
+        - cavaliro says: I wandered from land to land until I meet Gravelyn. She was kind to accept me on her army as one of her its Necromancer Warriors which conquer lands in her name. If she needs anything, I will get for her. 
+      
+# [ACTIONS] .......................................   
+
+      - Go back:
+        - scene: shadowfall-entrance
+        - scene: npc-gravelyn-dialog
+
+
+##################################################################################
+#################################     NEXT     ###################################
+##################################################################################

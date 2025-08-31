@@ -1,0 +1,272 @@
+start:
+# -------------------------------------------------------------------------------
+#                                 GLOBAL VARIABLES                             
+#                                  Load on Play
+# -------------------------------------------------------------------------------
+
+# [GERAL] ..................................................................... 1 
+  - var beverage: 0
+  - var map:
+  - var score: 0
+  - var casa: 1 
+            # 1 - Doomads
+            # 2 - Gaia
+            # 3 - Enchantia
+            # 4 - Elementia
+  - var nextMap:
+
+# [INTERACTION] ............................................................... 2
+
+# [DOOMADS] ................................................................. 2.1
+  - var gravelyn: 0
+  - var caiaque: 0
+  - var kyll: 0
+  - var cavaliro: 0
+  
+# [GAIA] .................................................................... 2.2
+  - var pen: 0
+  - var gertrudes: 0
+  
+  
+# [ENCHANTIA] ............................................................... 2.3
+  - var tomix:
+  - var azurih: 0
+  
+# [ELEMENTIA] ............................................................... 2.4
+  - var warlic: 0
+  - var sanclair: 0
+  
+  - scene: questVars
+
+# -------------------------------------------------------------------------------
+#                                 TRANSITIONS
+# -------------------------------------------------------------------------------
+
+# [SEM CASA] .................................................................. 1
+  
+  - if ({casa} == 0):
+    - hide ALL:
+    - call SHOWTITLE:
+      title: A Escolha das Casas
+      subtitle: Casa de Doomads
+    - hide ALL:
+    - scene: shadowfall-entrance
+    
+# [DOOMADS] ................................................................... 2 
+  
+  - if ({casa} == 1):
+    - hide ALL:
+    - show loader-doomads:
+    - wait: 5000
+    - hide ALL:
+    - scene: shadowfall-entrance
+    
+# [GAIA] ...................................................................... 3
+  
+  - if ({casa} == 2):
+    - hide ALL:
+    - call SHOWTITLE:
+      title: Gaia
+      subtitle: Fighting under the Rain
+    - hide ALL:
+    
+# [ENCHANTIA] ................................................................. 4
+  
+  - if ({casa} == 3):
+    - hide ALL:
+    - call SHOWTITLE:
+      title: Enchantia
+      subtitle: Fighting under the Rain
+    - hide ALL:
+    
+# [ELEMENTIA] ................................................................. 5 
+  
+  - if ({casa} == 4):
+    - hide ALL:
+    - call SHOWTITLE:
+      title: Elementia
+      subtitle: Fighting under the Rain
+    - hide ALL:
+# -------------------------------------------------------------------------------
+#                                   CREDITS
+# -------------------------------------------------------------------------------    
+endGame:
+  - hide ALL:
+  - effect ROLLINGCREDITS:
+    endGame: true
+    text:
+      - HollowInk - Visual Novel
+      - null # ----------------- ENGINE
+      - engine
+      - RenJs by Lunafromthemoon
+      - Powered by PhaserJS
+      - null # ----------------- ARTS
+      - background art and cgs by
+      - Artix Entertainment
+      - null # ----------------- PROGRAMMING
+      - programmed by
+      - Mareoceu
+      - null # ----------------- MUSIC/SFX
+      - music by
+      - Mareoceu
+      - null # ----------------- COLLABS
+      - Colaboradores
+      - Cavaliro Vampiro
+      - Caiaque
+      - Kyll
+      - null # ----------------- END.
+      
+      
+#################################################################################
+#################################################################################
+#################################################################################
+#--------------------------------------------------------------------------------
+#                            REFERENCE - EXPERIMENTAL
+#--------------------------------------------------------------------------------
+#################################################################################
+#################################################################################
+#################################################################################
+
+test:
+  - var score: 50
+  - var scroll-pangs: false
+  - var scroll-necro: false
+  - var health-potion: 0  
+  - call Scorer: "{score}"
+  
+  - scene: shop
+  
+# -------------------------------------------------------------------------------
+#                                  EXPERIMENTAL
+# ------------------------------------------------------------------------------- 
+
+
+# [updateQuest] ............................................................. 1.1
+# Ao mudar de SCENE, armazenar o nome da SCENE que vamos, ir para updateQuest 
+# e ir para a SCENE em seguida.
+
+# 1. Store NEXT SCENE name;
+# 2. Go to updateQuest;
+# 3. Go to SCENE
+
+  
+updateQuest:
+  # UPDATE VARS
+
+  # [QUEST] The Undead Plague
+  - var questcomplete: "{plague_item1have} >= {plague_item1req} && {plague_item2have} >= {plague_item2req} && {plague_item3have} >= {plague_item3req}"
+  
+  # GO BACK
+  - scene: "{nextMap}"
+  
+# [shop] ................................................................. 1.2
+  
+# 4 SHOPS
+
+# One for each house. It will work as tradeskills. And they will be only at
+# the Guild Hall.
+
+shop:
+  - var score: 50
+  - var scroll-pangs: false
+  - var scroll-necro: false
+  - var health-potion: 0  
+  - call Scorer: "{score}"
+
+
+  - show shadowfall-3:
+  - show cavaliro:
+  - text: "Necro: {scroll-necro} | Pangs: {scroll-pangs} | Health: {health-potion}"  
+
+  - choice:
+    - cavaliro says: Buy stuff here!
+    - (bold)Scroll of Pangs(end) (bold)(color:#00FFFF)20 Diamonds(end)(end) !if ({scroll-pangs} == false):
+      - choice:
+        - cavaliro says: Deseja comprar?
+        - Buy (color:#00FFFF)[20 Diamonds](end):
+        
+        # [WITHDRAW DIAMOND]
+          - if ({score} >= "20"):
+            - var score: "{score} - 20"
+            - call Scorer: "{score}"
+            - var scroll-pangs: true
+            
+          # [CONTINUES]   
+            - scene: shop
+
+    - (bold)Scroll of Necro(end) (color:#00FFFF)[20 Diamonds](end) !if ({scroll-necro} == false):
+      - choice:
+        - cavaliro says: Deseja comprar?
+        - Buy (bold)(color:#00FFFF)[20 Diamonds](end)(end):
+        
+          # [WITHDRAW DIAMOND]
+          - if ({score} >= "20"):
+            - var score: "{score} - 20"
+            - call Scorer: "{score}"
+            - var scroll-necro: true
+            
+            # [CONTINUES]   
+            - scene: shop
+            
+    # LIMITED QUANTY ITEM - 5X
+    - (bold)Potion(end) (color:#00FFFF)[1 Diamonds](end) !if ({health-potion} < 5):
+      - choice:
+        - cavaliro says: Deseja comprar?
+        - Buy (bold)(color:#00FFFF)[1 Diamond](end)(end):
+          
+          # [WITHDRAW DIAMOND]
+          - if ({score} >= "1"):
+            - var score: "{score} - 1"
+            - call Scorer: "{score}"
+            - var health-potion: "{health-potion} + 1"
+            - if ({health-potion} == 5):
+              - text: Você atingiu a quantidade máxima deste item.
+              
+            # [CONTINUES]   
+            - scene: shop
+            
+buyItem:
+#item
+#itemvalue
+#canBuy
+
+
+
+# Way to earn diamonds (quest, time playing)
+# Display SHOP LIST      
+# Max. Quantity
+# Not enough Diamonds
+
+# [MAPA] .................................................................. 1.3
+
+mapa:
+  - show amaps: WITH PaCTransition
+  
+  # CALL MAP ICON
+  - call PointAndClick: add
+    name: ghal
+    x: 700
+    y: 380
+    scene: guildhall-entrance
+  - call PointAndClick: activate
+  
+  - call PointAndClick: add
+    name: pin-doomwood
+    x: 493
+    y: 408
+    scene: secrethideout-entrance
+  - call PointAndClick: activate
+  
+  - call PointAndClick: add
+    name: pin-shadowfall
+    x: 637
+    y: 183
+    scene: shadowfall-entrance
+  - call PointAndClick: activate
+
+  - call PointAndClick: add
+    name: ghal
+    x: 300
+    y: 550
+    scene: start2
+  - call PointAndClick: activate
