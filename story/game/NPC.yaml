@@ -202,6 +202,7 @@ npc-cavaliro-dialog:
         - cavaliro says: That Lich came saying that he was going to study at the Library but he stole its books instead.
         - cavaliro says: Before leaving, the skies became purple-ish and a powerful lightning stroke the ground.
         - cavaliro says: The Undead Army started to act strange after that. Flesh started to be created from nowhere and our highness gravelyn lost the control over them.
+        - scene: npc-cavaliro-dialog
 
       - My name? !if ({cavaliro} < 2):
         - cavaliro says: My name?
