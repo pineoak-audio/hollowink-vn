@@ -17,6 +17,7 @@ npc-gravelyn:
   - if ({gravelyn} == 0):
     - gravelyn says: Hello, hero! It's been a while we don't see each other. 
     - gravelyn says: You came in such a bad time... The undeads are suffering from a plague spreaded by a powerful Lich.
+    - gravelyn says: I wonder... Are you here to help us?
     - var cavaliro: "{gravelyn} + 1"
     - scene: npc-gravelyn-dialog
 
