@@ -78,7 +78,7 @@ npc-gravelyn-dialog:
 # [NPC - GABERA] ............................................................ 1.2 
 
 npc-caiaque:
-
+  - gabera says:  This is my library. Don't touch anything.  
   - var caiaque: "{caiaque} + 1"
   - show gabera: WITH FUSION CONTINUE
 
